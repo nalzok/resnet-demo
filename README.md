@@ -28,8 +28,8 @@ Epoch 8, train loss: 940.5345458984375
 ===> Testing
 Train accuracy: 0.9915000200271606
 Test accuracy: 0.983299970626831
-177.10user 20.63system 1:51.40elapsed 177%CPU (0avgtext+0avgdata 4593904maxresident)k
-0inputs+55936outputs (2major+1683318minor)pagefaults 0swaps
+156.66user 20.04system 1:43.45elapsed 170%CPU (0avgtext+0avgdata 4475392maxresident)k
+0inputs+48720outputs (1major+1538458minor)pagefaults 0swaps
 ```
 
 Note: I used `initialize_cache('jit_cache')` to persist the JIT compilation cache to the disk.

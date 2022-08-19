@@ -1,3 +1,5 @@
+import argparse
+
 import jax
 import jax.numpy as jnp
 from jax.experimental.compilation_cache.compilation_cache import initialize_cache
@@ -6,16 +8,21 @@ import torch
 from torch.utils.data import DataLoader
 from torchvision.datasets import MNIST
 import torchvision.transforms as T
-import click
 
 from .train import create_train_state, train_step, cross_replica_mean, test_step
 
 
-@click.command()
-@click.option('--batch_size', type=int, required=True)
-@click.option('--epochs', type=int, required=True)
-@click.option('--learning_rate', type=float, required=True)
-def cli(batch_size: int, epochs: int, learning_rate: float):
+def cli():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--batch_size', type=int)
+    parser.add_argument('--epochs', type=int)
+    parser.add_argument('--learning_rate', type=float)
+    args = parser.parse_args()
+
+    batch_size = args.batch_size
+    epochs = args.epochs
+    learning_rate = args.learning_rate
+
     device_count = jax.local_device_count()
     assert batch_size % device_count == 0, f'batch_size should be divisible by {device_count}'
 

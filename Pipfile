@@ -10,7 +10,6 @@ flax = "*"
 optax = "*"
 torch = "*"
 torchvision = "*"
-click = "*"
 
 [dev-packages]
 black = "*"

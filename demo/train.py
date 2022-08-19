@@ -27,7 +27,7 @@ def create_train_state(key: Any, num_classes: int, learning_rate: float, specime
     return state
 
 
-@partial(jax.pmap, axis_name='batch')
+@partial(jax.pmap, axis_name='batch', donate_argnums=(0,))
 def train_step(state: TrainState, image: jnp.ndarray, label: jnp.ndarray) -> Tuple[TrainState, jnp.ndarray]:
     @partial(jax.value_and_grad, has_aux=True)
     def loss_fn(params):
