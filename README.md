@@ -6,7 +6,7 @@ Install dependencies with the following command
 PIP_FIND_LINKS=https://storage.googleapis.com/jax-releases/libtpu_releases.html pipenv update
 ```
 
-Then just run `make`
+Then, just run `make`
 
 ```
 $ make
@@ -28,9 +28,22 @@ Epoch 8, train loss: 940.5345458984375
 ===> Testing
 Train accuracy: 0.9915000200271606
 Test accuracy: 0.983299970626831
-156.66user 20.04system 1:43.45elapsed 170%CPU (0avgtext+0avgdata 4475392maxresident)k
-0inputs+48720outputs (1major+1538458minor)pagefaults 0swaps
+180.17user 21.31system 1:54.83elapsed 175%CPU (0avgtext+0avgdata 4800856maxresident)k
+0inputs+82456outputs (6major+1961357minor)pagefaults 0swaps
 ```
 
-Note: I used `initialize_cache('jit_cache')` to persist the JIT compilation cache to the disk.
-The `jit_cache/` directory might take several GiB, but feel free to delete it at any time.
+Note that I used `initialize_cache('jit_cache')` to persist the JIT compilation cache to the local disk,
+so that JAX does not need to re-compile the functions each time we run the program.
+This is an [experimental feature](https://github.com/google/jax/issues/2490) and only works on TPU for now.
+To see it in action, run `make` again.
+It will give you exactly the same result but finish faster.
+
+```
+$ make
+...
+111.40user 16.97system 1:23.93elapsed 152%CPU (0avgtext+0avgdata 2881788maxresident)k
+0inputs+48outputs (1major+1042548minor)pagefaults 0swaps
+```
+
+The `jit_cache/` directory takes ~40MiB.
+Feel free to delete it to save some space.
