@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "*"
+jax = {extras = ["tpu"]}
+flax = "*"
+optax = "*"
+torch = "*"
+torchvision = "*"
+click = "*"
+
+[dev-packages]
+black = "*"
+
+[requires]
+python_version = "3.8"
